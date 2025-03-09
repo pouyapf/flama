@@ -74,17 +74,17 @@ const DnDComponent = ({ data }) => {
   return (
     <div className='mt-20 flex gap-10 flex-col justify-center items-center  w-full'>
       <div className='flex  justify-center flex-wrap items-center gap-5'>
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <div
             key={index}
             onClick={() => handleItemClick(item)}
             className={`transition-all w-5/6 duration-300   hover:bg-greenbtn flex flex-col justify-center lg:w-fit items-center
                p-4 pl-20 pr-20  rounded-md border-2 border-solid
-                border-orangeidea ${selectedItems.some(selectedItem => selectedItem.id === item.id) ? ' bg-blueidea text-white' : ''}`}
+                border-orangeidea ${selectedItems?.some(selectedItem => selectedItem?.id === item?.id) ? ' bg-blueidea text-white' : ''}`}
           >
             <FaSitemap />
-            <span>{item.fit}</span>
-            <NumberWithCommas number={item.price} />
+            <span>{item?.fit}</span>
+            <NumberWithCommas number={item?.price} />
           </div>
         ))}
       </div>
@@ -118,7 +118,7 @@ const DnDComponent = ({ data }) => {
       <span className=' flex justify-center items-center gap-2' > <AiFillDollarCircle size={25} /> قیمت   : <span><NumberWithCommas number={totalPrice}/> تومان</span> </span>
 
       <div className='mt-10 flex items-center justify-center gap-16'>
-        {loading ?( <BeatLoader color={'rgb(167, 139, 250)'} loading={loading} size={15} />):( <button onClick={handleSubmit} className=' bg-bluebtn p-4 text-white  rounded'>
+        {loading ?( <BeatLoader color={'rgb(167, 139, 250)'} loading={loading} size={15} />):( <button onClick={()=>handleSubmit()} className=' bg-bluebtn p-4 text-white  rounded'>
           مرحله بعد
         </button>)}
        

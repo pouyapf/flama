@@ -8,43 +8,48 @@ import Footer from '../../components/Footer/Footer';
 import Head from 'next/head';
 
 
-
 let cachedClient = null;
 
 async function connectToDatabase() {
-  if (cachedClient) {
+  if (cachedClient && cachedClient.topology && cachedClient.topology.isConnected()) {
     return cachedClient;
   }
 
-  const client = await MongoClient.connect(process.env.MONGODB_URI, {
+  if (!process.env.MONGODB_URI) {
+    throw new Error("MONGODB_URI is not defined in environment variables.");
+  }
+
+  const client = new MongoClient(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
+
+  await client.connect();
   cachedClient = client;
   return client;
 }
 
 export async function getServerSideProps(context) {
-  const { params } = context;
   try {
-    if (!process.env.MONGODB_URI) {
-      console.error("MONGODB_URI is not defined.");
-      return {
-        props: {
-          allplans: [],
-        },
-      };
+    const { params } = context;
+    
+    if (!params || !params.order) {
+      console.error("Error: Missing order parameter.");
+      return { props: { allplans: [] } };
     }
 
-    const client = await connectToDatabase();
+    console.log("Fetching data for order:", params.order);
 
-    // Fetch data from the "plans" collection in the "music" database
-    const db = client.db("plans");
-    const plansdata = await db
-      .collection("plans")
+    const client = await connectToDatabase();
+    const db = client.db("plans"); // Make sure the database name is correct
+    const plansCollection = db.collection("plans");
+
+    const plansdata = await plansCollection
       .find({ plan_name: params.order })
       .sort({ timestamp: -1 })
       .toArray();
+
+    console.log("Fetched plans count:", plansdata.length);
 
     return {
       props: {
@@ -52,7 +57,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (e) {
-    console.error("Error in getServerSideProps:", e);
+    console.error("Error fetching plans:", e);
     return {
       props: {
         allplans: [],
@@ -62,12 +67,8 @@ export async function getServerSideProps(context) {
 }
 
 
-
-
-
-
-
 function Order({allplans}) {
+  console.log(allplans)
   
   return (
     <div className=' relative'>
@@ -91,7 +92,8 @@ function Order({allplans}) {
 
        
 </div >
-        <DnDComponent data={allplans}/>
+{allplans && (<DnDComponent data={allplans}/>)}
+        
         <div className=' w-full flex justify-center items-center '><span className=' w-full text-center'>
           نکته : قیمت ممکنه نسبت به توزیحات تغییر کنه
           </span></div>
