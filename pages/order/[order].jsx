@@ -87,7 +87,7 @@ function Order({allplans}) {
        
          <span >بیا باهم بسازیمش</span></div>
           <span className='text-4xl  text-center tracking-wide font-black'>هرچی واسه سایتت نیاز داری میتونی برداری  </span>
-         <span className='text-sm font-thin'> کافیه رو هر گزینه ای که لازم داری کلیک کنی </span>
+         <span className='text-sm font-thin'> کافیه رو هر گزینه ای که لازم داری asddas کلیک کنی </span>
 
        
 </div >
