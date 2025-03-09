@@ -68,7 +68,7 @@ export async function getServerSideProps(context) {
 
 
 function Order({allplans}) {
-  
+    console.log(allplans)
   return (
     <div className=' relative'>
       <Head>
