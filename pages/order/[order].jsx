@@ -104,4 +104,4 @@ function Order({allplans}) {
   )
 }
 
-export default requireAuth(Order)
+export default Order
