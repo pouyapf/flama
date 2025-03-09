@@ -1,0 +1,37 @@
+.cardcont{
+/* From https://css.glass */
+background: rgba(0, 68, 85, 0.2);
+border-radius: 3px;
+
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(6.9px);
+-webkit-backdrop-filter: blur(6.9px);
+border: 1px solid rgba(0, 68, 85, 0.3);
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 2rem;
+width: 70%;
+}
+
+
+@media screen and (max-width: 769px) {
+
+    .cardcont{
+        /* From https://css.glass */
+        background: rgba(0, 68, 85, 0.2);
+        border-radius: 3px;
+        
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(6.9px);
+        -webkit-backdrop-filter: blur(6.9px);
+        border: 1px solid rgba(0, 68, 85, 0.3);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        width: 95%;
+        }
+        
+        
+}

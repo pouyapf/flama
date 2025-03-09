@@ -1,0 +1,36 @@
+.cardcont{
+    width: 600px;
+ height: 700px;
+
+padding: 2rem;
+background: linear-gradient(16deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 57%, rgba(0,30,111,0.3) 100%);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(6.9px);
+border-radius: 7px;
+-webkit-backdrop-filter: blur(6.9px);
+border: 1px solid rgba(11, 116, 143, 0.4);
+display: flex;
+justify-content: space-around;
+align-items: center;
+flex-direction: column;
+
+}
+@media screen and (max-width: 769px) {
+    .cardcont{
+        width: 95%;
+     height: auto;
+    
+    padding: 2rem;
+    background: linear-gradient(16deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 57%, rgba(0,30,111,0.3) 100%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.9px);
+    border-radius: 7px;
+    -webkit-backdrop-filter: blur(6.9px);
+    border: 1px solid rgba(11, 116, 143, 0.4);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    
+    }
+}
