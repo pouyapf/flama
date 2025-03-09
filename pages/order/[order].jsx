@@ -30,22 +30,23 @@ async function connectToDatabase() {
 }
 
 export async function getServerSideProps(context) {
+  console.log("=== Running getServerSideProps ===");
+  console.log("Params:", context.params);
+
+  if (!process.env.MONGODB_URI) {
+    console.error("MONGODB_URI is missing in environment variables.");
+    return { props: { allplans: [] } };
+  }
+
   try {
-    const { params } = context;
-    
-    if (!params || !params.order) {
-      console.error("Error: Missing order parameter.");
-      return { props: { allplans: [] } };
-    }
-
-    console.log("Fetching data for order:", params.order);
-
     const client = await connectToDatabase();
-    const db = client.db("plans"); // Make sure the database name is correct
+    const db = client.db("plans");
     const plansCollection = db.collection("plans");
 
+    console.log("Querying database for:", context.params.order);
+
     const plansdata = await plansCollection
-      .find({ plan_name: params.order })
+      .find({ plan_name: context.params.order })
       .sort({ timestamp: -1 })
       .toArray();
 
@@ -59,9 +60,7 @@ export async function getServerSideProps(context) {
   } catch (e) {
     console.error("Error fetching plans:", e);
     return {
-      props: {
-        allplans: [],
-      },
+      props: { allplans: [] },
     };
   }
 }
