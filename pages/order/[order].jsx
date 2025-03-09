@@ -91,7 +91,7 @@ function Order({allplans}) {
 
        
 </div >
-        <DnDComponent data={allplans}/>
+  
         <div className=' w-full flex justify-center items-center '><span className=' w-full text-center'>
           نکته : قیمت ممکنه نسبت به توزیحات تغییر کنه
           </span></div>
@@ -104,4 +104,4 @@ function Order({allplans}) {
   )
 }
 
-export default Order
+export default requireAuth(Order)
